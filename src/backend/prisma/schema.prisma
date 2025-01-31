@@ -1,0 +1,33 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @db.VarChar(255)
+  email     String     @unique @db.VarChar(255)
+  name      String     @db.VarChar(255)
+  createdAt Int        @map("created_at")
+  updatedAt Int        @map("updated_at")
+  documents Document[] @relation("UserDocuments")
+
+  @@map("users")
+}
+
+model Document {
+  id        String  @id @db.VarChar(255)
+  title     String  @db.VarChar(1024)
+  isDeleted Boolean @default(false)
+
+  createdAt Int    @map("created_at")
+  updatedAt Int    @map("updated_at")
+  ownerId   String @map("owner_id") @db.VarChar(255)
+  owner     User   @relation("UserDocuments", fields: [ownerId], references: [id])
+
+  @@map("documents")
+}

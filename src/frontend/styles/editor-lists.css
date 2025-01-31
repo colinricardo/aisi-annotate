@@ -1,0 +1,64 @@
+/* base list styles */
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.2em;
+  margin: 0.5em 0;
+}
+
+/* uordered list styles */
+.ProseMirror ul {
+  list-style-type: disc;
+}
+
+.ProseMirror ul ul {
+  list-style-type: circle;
+  padding-left: 1.2em;
+}
+
+.ProseMirror ul ul ul {
+  list-style-type: square;
+  padding-left: 1.2em;
+}
+
+/* ordered list styles */
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.2em;
+}
+
+.ProseMirror ol ol {
+  list-style-type: lower-alpha;
+  padding-left: 1.2em;
+}
+
+.ProseMirror ol ol ol {
+  list-style-type: lower-roman;
+  padding-left: 1.2em;
+}
+
+/* list item styles */
+.ProseMirror li {
+  position: relative;
+  padding-left: 1em;
+  margin: 0.2em 0;
+}
+
+/* marker styles */
+.ProseMirror ul li::marker {
+  font-size: 1em;
+  content: "●";
+}
+
+.ProseMirror ul ul li::marker {
+  content: "○";
+  font-size: 0.8em;
+}
+
+.ProseMirror ul ul ul li::marker {
+  content: "■";
+  font-size: 0.8em;
+}
+
+.ProseMirror ol li::marker {
+  color: hsl(var(--foreground));
+}

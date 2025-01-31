@@ -1,0 +1,137 @@
+.ProseMirror {
+  @apply p-12 px-8 sm:px-12;
+
+  /* annotation styles */
+  [class^="annotation-"] {
+    @apply bg-yellow-100 dark:bg-yellow-900/50;
+  }
+}
+
+.ProseMirror p {
+  @apply text-base text-foreground  leading-normal;
+}
+
+/* this styles the placeholder for empty nodes */
+.ProseMirror .is-empty::before {
+  content: attr(data-placeholder);
+  pointer-events: none;
+  float: left;
+  height: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+.tippy-box {
+  max-width: 400px !important;
+}
+
+/* selected node styles */
+.ProseMirror:not(.dragging) .ProseMirror-selectednode {
+  outline: none !important;
+  background-color: var(--primary);
+  transition: background-color 0.2s;
+  box-shadow: none;
+}
+
+.ProseMirror-selectednode iframe {
+  transition: outline 0.15s;
+  outline: 6px solid #fbbf24;
+}
+
+span[style] > strong,
+mark[style] > strong {
+  color: inherit;
+}
+
+body.typing .navbar,
+body.typing .status-bar,
+body.typing .navbar-shell {
+  display: none;
+}
+
+/* give a remote user a caret */
+.collaboration-cursor__caret {
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-color: hsl(var(--primary));
+  margin-left: -2px;
+  margin-right: -2px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+  /* opacity: 0.8; */
+}
+
+/* render the username above the caret */
+.collaboration-cursor__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: -28px;
+  font-size: 0.75rem;
+  line-height: 14px;
+  padding: 2px 10px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  width: fit-content;
+  border-radius: 3px;
+  border: 2px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--card));
+  font-weight: 500;
+  transition: box-shadow 200ms ease-in-out;
+}
+
+.collaboration-cursor__label:hover {
+  box-shadow: 4px 4px 0px 0px #000;
+}
+
+.ProseMirror .block-node:not(:last-child),
+.ProseMirror .list-node:not(:last-child),
+.ProseMirror .text-node:not(:last-child) {
+  @apply -mb-2.5;
+}
+
+.ProseMirror {
+  @apply outline-0 pr-8 pl-20 py-16 z-0 lg:pl-8 lg:pr-8 mx-auto max-w-2xl;
+
+  .selection {
+    @apply inline-block;
+  }
+
+  .selection,
+    /* *::selection { */
+      /* @apply bg-primary/10 inline-block; */
+    /* } */
+  
+    & > .react-renderer {
+    @apply my-12 first:mt-0 last:mb-0;
+  }
+
+  &.resize-cursor {
+    @apply cursor-col-resize;
+  }
+
+  .ProseMirror-gapcursor {
+    @apply relative;
+
+    &:after {
+      content: "";
+      @apply absolute w-[1px] h-[1em] bg-foreground animate-blink;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
